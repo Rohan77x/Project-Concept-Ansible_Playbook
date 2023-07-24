@@ -1,0 +1,21 @@
+---
+- name: Install Nginx on RedHat/CentOS
+  hosts: your_redhat_servers
+  become: yes
+  
+  tasks:
+    - name: Install EPEL repository (required for Nginx on RedHat)
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Install Nginx
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start Nginx service and enable it at boot
+      service:
+        name: nginx
+        state: started
+        enabled: yes
